@@ -1,0 +1,42 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "nft": {
+    "contract": "Mokko42NFT",
+    "address": "0x020679bCebe58e02F989FD2e93af48A865Ac3Ec7",
+    "owner": "0x6f2CBd6191aaE03b8123Fcd5a4e8d255Cb2a2743",
+    "artist": "maagosti",
+    "deployTx": "0x1de3dec6c5006caf3512ba2cf129516ffe10cf7dd36a3380a5db3cb612686875",
+    "deployedAt": "2026-10-26T16:28:37.319Z",
+    "tokens": [
+      {
+        "tokenId": "1",
+        "mintedTo": "0x6f2CBd6191aaE03b8123Fcd5a4e8d255Cb2a2743",
+        "tokenURI": "ipfs://bafkreieutd5aybbgdymw2vpzfqiey45gvwyocnfguwokpdhlkb3b5lkacu",
+        "mintTx": "0xe6f24cad49194f0d9e98ef100a48b3176e076d167a571fe3e3d5840082a0161d",
+        "mintedAt": "2026-10-26T16:29:13.183Z"
+      }
+    ]
+  },
+  "inscriptions": {
+    "contract": "Mokko42Inscriptions",
+    "address": "0x4a50b8199603ED1f45f55F5A2Ae5107947C544D0",
+    "owner": "0x6f2CBd6191aaE03b8123Fcd5a4e8d255Cb2a2743",
+    "artist": "maagosti",
+    "deployTx": "0x8707c83bb95af96e0653c81d252efbea1875f4ca123bc92a3d1ed993655d30fa",
+    "deployedAt": "2026-10-26T16:28:51.238Z",
+    "tokens": [
+      {
+        "tokenId": "1",
+        "name": "42 - Best Bocal",
+        "mintedTo": "0x6f2CBd6191aaE03b8123Fcd5a4e8d255Cb2a2743",
+        "artwork": "mint/artworks/42-bocal-onchain.webp",
+        "imageBytes": 28236,
+        "chunks": 3,
+        "mintTx": "0x9433c1ae3e2795ecb6d769d818f16ac6921bddcebe28c1309e613d5f26c51152",
+        "finalizeTx": "0x038220700b94882bf4e5f47ea379e5420000e5fe4ebda263beb163f459732459",
+        "mintedAt": "2026-10-26T16:30:13.197Z"
+      }
+    ]
+  }
+}

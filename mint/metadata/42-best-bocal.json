@@ -1,0 +1,17 @@
+{
+  "name": "42 - Best Bocal",
+  "description": "42 - Best Bocal, an artwork by maagosti for TokenizeArt.",
+  "artist": "maagosti",
+  "created_by": "maagosti",
+  "image": "ipfs://bafybeidgq3pfjrmxekjmxpjky5brgqifkpw6gaxjfc4emangn764okstg4",
+  "attributes": [
+    {
+      "trait_type": "Artist",
+      "value": "maagosti"
+    },
+    {
+      "trait_type": "Storage",
+      "value": "IPFS"
+    }
+  ]
+}

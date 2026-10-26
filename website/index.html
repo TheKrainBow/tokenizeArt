@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TokenizeArt · Mokko 42</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">42</span>
+      <div>
+        <h1>TokenizeArt</h1>
+        <p class="muted" id="collection-line">Loading collection…</p>
+      </div>
+    </div>
+    <div class="wallet">
+      <span class="badge" id="network-badge">–</span>
+      <span class="badge" id="role-badge" hidden></span>
+      <button id="connect-button" class="button">Connect wallet</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="gallery">Gallery</button>
+    <button class="tab" data-tab="mint">Mint</button>
+    <button class="tab" data-tab="owner">Who owns it?</button>
+    <button class="tab" data-tab="transfer">Transfer</button>
+  </nav>
+
+  <main>
+    <!-- Gallery: every token of both collections, read from the blockchain -->
+    <section class="panel active" id="tab-gallery">
+      <div class="panel-head">
+        <h2>Gallery</h2>
+        <button class="button ghost" id="refresh-button">Refresh</button>
+      </div>
+      <p class="muted">Two separate contracts, each with its own tokens, read live from the blockchain. The same artwork can be minted in both: that makes two different NFTs.</p>
+
+      <div class="collection">
+        <h3><span class="badge ok">Mandatory</span> IPFS collection · Mokko42NFT</h3>
+        <p class="muted">Image and metadata JSON on IPFS; the contract only stores the <code>ipfs://</code> link.</p>
+        <div class="grid" id="gallery-nft"></div>
+      </div>
+
+      <div class="collection">
+        <h3><span class="badge ok">Bonus</span> On-chain inscriptions · Mokko42Inscriptions</h3>
+        <p class="muted">Image bytes and metadata stored inside the contract; <code>tokenURI</code> is built on-chain.</p>
+        <div class="grid" id="gallery-inscriptions"></div>
+      </div>
+    </section>
+
+    <!-- Mint: one form for both collections. Only the contract owner can mint (enforced by the contract) -->
+    <section class="panel" id="tab-mint">
+      <h2>Mint</h2>
+      <p class="muted" id="mint-notice">Connect the wallet that owns the contracts to mint. Anyone else is refused by the smart contract itself.</p>
+
+      <form class="card form mint-form" id="mint-form">
+        <label class="dropzone" id="dropzone">
+          <input name="file" type="file" accept=".svg,.png,.jpg,.jpeg,.gif,.webp" required>
+          <img id="mint-preview" alt="" hidden>
+          <span id="dropzone-text">Choose an artwork (it must show 42)</span>
+        </label>
+
+        <label>Title
+          <input name="title" placeholder="Best Bocal" required>
+          <span class="hint" id="name-hint">NFT name: “42 - …”</span>
+        </label>
+        <label><span>Description <span class="muted">(optional)</span></span>
+          <input name="description">
+        </label>
+
+        <fieldset class="storage">
+          <legend>Where is the artwork stored?</legend>
+          <label class="choice">
+            <input type="radio" name="storage" value="nft" checked>
+            <span><strong>IPFS</strong> · Mokko42NFT<br><span class="muted" id="ipfs-hint">Mandatory part. Any image size.</span></span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="storage" value="inscriptions">
+            <span><strong>On-chain</strong> · Mokko42Inscriptions<br><span class="muted" id="onchain-hint">Bonus. Image stored inside the contract, 32 KB max.</span></span>
+          </label>
+        </fieldset>
+
+
+        <details>
+          <summary>Advanced</summary>
+          <label>Receiver address
+            <input name="to" placeholder="0x… (empty = connected wallet)">
+          </label>
+        </details>
+
+        <button type="submit" class="button" id="mint-button">Mint</button>
+      </form>
+      <pre class="log" id="mint-log" hidden></pre>
+    </section>
+
+    <!-- Owner lookup: ownerOf -->
+    <section class="panel" id="tab-owner">
+      <h2>Who owns it?</h2>
+      <form class="card form narrow" id="owner-form">
+        <label>Collection
+          <select name="collection">
+            <option value="nft">IPFS (Mokko42NFT)</option>
+            <option value="inscriptions">On-chain (Mokko42Inscriptions)</option>
+          </select>
+        </label>
+        <label>Token id
+          <input name="tokenId" type="number" min="1" value="1" required>
+        </label>
+        <button type="submit" class="button">ownerOf</button>
+      </form>
+      <div id="owner-result"></div>
+    </section>
+
+    <!-- Transfer: safeTransferFrom, only works for the token holder -->
+    <section class="panel" id="tab-transfer">
+      <h2>Transfer</h2>
+      <form class="card form narrow" id="transfer-form">
+        <label>Collection
+          <select name="collection">
+            <option value="nft">IPFS (Mokko42NFT)</option>
+            <option value="inscriptions">On-chain (Mokko42Inscriptions)</option>
+          </select>
+        </label>
+        <label>Token id
+          <input name="tokenId" type="number" min="1" value="1" required>
+        </label>
+        <label>Receiver address
+          <input name="to" placeholder="0x…" required>
+        </label>
+        <button type="submit" class="button">safeTransferFrom</button>
+      </form>
+      <pre class="log" id="transfer-log" hidden></pre>
+    </section>
+    <!-- Token page: opened by clicking a token card (#token/<collection>/<id>) -->
+    <section class="panel" id="tab-token">
+      <a href="#" class="back">← Back</a>
+      <div id="token-page"></div>
+    </section>
+  </main>
+
+
+  <footer class="muted" id="footer"></footer>
+
+  <script src="vendor/ethers.umd.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
